@@ -26,6 +26,7 @@ set -e
 
 GO_VERSION="1.1.1"
 USER_AGENT='Mozilla/5.0 (Windows NT 6.1; rv:17.0) Gecko/20100101 Firefox/17.0")'
+PREFIX=${PREFIX:-/usr/local}
 contact_name=isis
 contact_host=patternsinthevoid.net
 contact="${contact_name}@${contact_host}"
@@ -216,9 +217,9 @@ function install_go ()
     HASHDIFF=`diff ${theirs} ${ours}`
     if [[ "$HASHDIFF" == "" ]]; then
         printf "Installing GoTools ...\n"
-        printf "Because unpacking the tarball into /usr/local requires root,\n"
+        printf "Because unpacking the tarball into $PREFIX requires root,\n"
         printf "you will be prompted for your sudo password.\n"
-        sudo -- tar -C /usr/local -xzf $GO_SOURCE && \
+        sudo -- tar -C $PREFIX -xzf $GO_SOURCE && \
             printf "Installation successful.\n"
     else
         printf "WARNING: SHA1 sums do not match! Not installing...\n"
@@ -246,7 +247,7 @@ function export_paths ()
         printf "Modifying system \$PATH to include Go..."
         cat >> /etc/profile<<EOF
 ## Path to GoTools
-export GOROOT=/usr/local/go
+export GOROOT=$PREFIX/go
 export PATH=$PATH:$GOROOT/bin
 EOF
         printf "Successfully updated \$PATH in /etc/profile."
@@ -256,7 +257,7 @@ EOF
         cat >> $HOME/.profile<<FIN
 ## Path to GoTools
 ## place the following in /etc/profile to enable Go for all users:
-export GOROOT=/usr/local/go
+export GOROOT=$PREFIX/go
 export PATH=$PATH:$GOROOT/bin
 FIN
         printf "Successfully updated \$PATH in ${HOME}/.profile..."
@@ -284,7 +285,7 @@ function go_check ()
     if test -n $(which go) ; then
         current=$(go version | cut -d " " -f 3 | cut -b 3- )
         printf "Found previous Go installation. Version: %s\n" ${current}
-        if test -d /usr/local/go ; then
+        if test -d $PREFIX/go ; then
             if [[ "$current" == "${GO_VERSION}" ]] ; then
                 printf "Already up to date!\n"
                 exit 0
