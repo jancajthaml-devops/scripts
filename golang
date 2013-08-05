@@ -248,7 +248,7 @@ function export_paths ()
         cat >> /etc/profile<<EOF
 ## Path to GoTools
 export GOROOT=$PREFIX/go
-export PATH=$PATH:$GOROOT/bin
+export PATH=\$PATH:\$GOROOT/bin
 EOF
         printf "Successfully updated \$PATH in /etc/profile."
     else
@@ -258,7 +258,7 @@ EOF
 ## Path to GoTools
 ## place the following in /etc/profile to enable Go for all users:
 export GOROOT=$PREFIX/go
-export PATH=$PATH:$GOROOT/bin
+export PATH=\$PATH:\$GOROOT/bin
 FIN
         printf "Successfully updated \$PATH in ${HOME}/.profile..."
     fi
