@@ -217,9 +217,7 @@ function install_go ()
     HASHDIFF=`diff ${theirs} ${ours}`
     if [[ "$HASHDIFF" == "" ]]; then
         printf "Installing GoTools ...\n"
-        printf "Because unpacking the tarball into $PREFIX requires root,\n"
-        printf "you will be prompted for your sudo password.\n"
-        sudo -- tar -C $PREFIX -xzf $GO_SOURCE && \
+        tar -C $PREFIX -xzf $GO_SOURCE && \
             printf "Installation successful.\n"
     else
         printf "WARNING: SHA1 sums do not match! Not installing...\n"
