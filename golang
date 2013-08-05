@@ -6,9 +6,9 @@
 # Install or update Go language.
 #
 # Download Go source tarball and SHA1 hash from https://code.google.com. If
-# hashcheck is okay, install and setup Go in /usr/local/go, and modify the
-# system default $PATH to include Go's location by appending it to
-# /etc/profile.
+# hashcheck is okay, install and setup Go in $PREFIX/go (/usr/local/go if
+# $PREFIX unset), and modify the system default $PATH to include Go's location
+# by appending it to /etc/profile if run as root, or ~/.profile otherwise.
 #
 # For x86_64 and 32-bit Linux, only. Should work on all distros, except for
 # RHEL and CentOS.
@@ -43,10 +43,10 @@ If you have tor and torsocks installed, you can use this script like so:
 
 Additional Info
 ---------------
-The 'install' and 'path' options will append to /etc/profile (this is part
-of the Go installation instructions; it's so that your GOPATH and GOROOT
-environment variables are available for use), whereas the 'reinstall' option
-will not update your PATH.
+The 'install' and 'path' options will append to /etc/profile if run as root or
+~/.profile otherwise (this is part of the Go installation instructions; it's so
+that your GOPATH and GOROOT environment variables are available for use),
+whereas the 'reinstall' option will not update your PATH.
 
 If reinstalling, make sure to choose the reinstall option, else you'll end
 up with Go in your PATH twice!
