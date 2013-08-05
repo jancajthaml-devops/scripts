@@ -242,7 +242,7 @@ function clean_up ()
 function export_paths ()
 {
     if [ $(id -u) -eq 0 ]; then
-        printf
+        printf ""
         printf "Modifying system \$PATH to include Go..."
         cat >> /etc/profile<<EOF
 ## Path to GoTools
@@ -251,7 +251,7 @@ export PATH=$PATH:$GOROOT/bin
 EOF
         printf "Successfully updated \$PATH in /etc/profile."
     else
-        printf
+        printf ""
         printf "Modifying user \$PATH..."
         cat >> $HOME/.profile<<FIN
 ## Path to GoTools
