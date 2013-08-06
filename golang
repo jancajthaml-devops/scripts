@@ -233,7 +233,7 @@ function clean_up ()
     for file in $JUNK; do
         if test -f $file ; then
             printf "Removing ${file}..."
-            sudo rm $file
+            rm $file
         fi
     done
 }
