@@ -244,19 +244,23 @@ function export_paths ()
         printf ""
         printf "Modifying system \$PATH to include Go..."
         cat >> /etc/profile<<EOF
+
 ## Path to GoTools
 export GOROOT=$PREFIX/go
-export PATH=\$PATH:\$GOROOT/bin
+export GOPATH=$HOME/go
+export PATH=\$PATH:\$GOROOT/bin:\$GOPATH/bin
 EOF
         printf "Successfully updated \$PATH in /etc/profile."
     else
         printf ""
         printf "Modifying user \$PATH..."
         cat >> $HOME/.profile<<FIN
+
 ## Path to GoTools
 ## place the following in /etc/profile to enable Go for all users:
 export GOROOT=$PREFIX/go
-export PATH=\$PATH:\$GOROOT/bin
+export GOPATH=$HOME/go
+export PATH=\$PATH:\$GOROOT/bin:\$GOPATH/bin
 FIN
         printf "Successfully updated \$PATH in ${HOME}/.profile..."
     fi
